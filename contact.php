@@ -42,72 +42,7 @@
     </div>
     <!-- preloader end -->
 
-     <!-- header begin-->
-     <header class="header">
-        <div class="header-bottom">
-            <div class="container">
-                <div class="row d-flex">
-                    <div class="col-xl-2 col-lg-2 col-12 d-block d-xl-flex d-lg-flex align-items-center">
-                        <div class="mobile-special">
-                            <div class="row d-flex">
-                                <div class="col-6 col-xl-12 col-lg-12 d-flex align-items-center">
-                                    <div class="logo">
-                                        <a href="index.php">
-                                            <img src="assets\img\logo.png" alt="" width="140px" height="87px">                     
-                                    </div>
-                                </div>
-                                <div class="col-6 d-block d-xl-none d-lg-none">
-                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                        <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-8 col-lg-8">
-                        <div class="mainmenu">
-                            <nav class="navbar navbar-expand-lg">
-                            
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul class="navbar-nav mr-auto justify-content-center">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="about.php">About Us</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="investment.php">Investment Plan</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="faq.php">FAQ</a>
-                                        </li>
-                                        <li class="nav-item">
-                                                <a class="nav-link" href="blog.php">Blog</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="contact.php">Contact </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                    <div class="col-xl-1 col-lg-1 d-flex align-items-center">
-                        <div class="join-us">
-                            <a href="register.php"> sign up </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-1 col-lg-1 d-flex align-items-center">
-                         <div class="join-us">
-                            <a href="login.php"> login </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- header end -->
+    <?php include 'include/header.php';?>
 
     <!-- page title begin-->
     <div class="page-title contact-page">
@@ -230,105 +165,7 @@
     </div>
     <!-- contact end -->
 
-   <!-- footer begin -->
-   <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-7 col-lg-7 col-md-8">
-                <div class="box">
-                    <div class="logo">
-                        <a href="#">
-                            <img src="assets\img\logo.png" alt="" width="170px" height="130px"> 
-                        </a>
-                    </div>
-                    <p>
-                        Now that you know what we've done and what we could do for you , <br> feel free to reach out  and start a conversation. we always enjoy <br> speaking with passionate business owners about their needs.
-                    </p>
-                    <div class="social_links">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fab fa-google-plus-g"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-7">
-                <div class="box box3">
-                    <h2>
-                        About Us
-                    </h2>
-                    <ul>
-                         <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Contact 
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                FAQ
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-2 col-md-5">
-                <div class="box box4">
-                    <h2>
-                        Contact Us
-                    </h2>
-                    <p>
-                        Tripoli, Libya
-                    </p>
-                    <a href="#">
-                        contact@purplecode.ly
-                    </a>
-                    <a href="#">
-                        +218 910000000
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="copyright">
-        <p class="text-center">
-            © 2019. All Rights Reserved.
-        </p>
-    </div>
-</footer>
-<!-- footer end -->
+    <?php include 'include/footer.php';?>
     
     <!-- scroll top button begin -->
     <div class="scroll-to-top">
@@ -357,5 +194,4 @@
     <!-- main -->
     <script src="assets\js\main.js"></script>
 </body>
-
 </html>
