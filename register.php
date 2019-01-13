@@ -51,7 +51,83 @@
 
     <!-- page title begin-->
     <div class="page-title register-page">
-        <!-- register begin-->
+    <!-- register begin-->
+    <?php
+    $isError = false ;
+    $message ="";
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $firstname=$_POST["InputFirstname"];
+        $lastname=$_POST["InputLastname"];
+        $username=$_POST["InputUsername"];
+        $pass1=$_POST["InputPassword"];
+        $pass2=$_POST["InputRetypepassword"];
+        $email=$_POST["InputMail"];
+
+        if(empty($firstname)){
+            $message .= " Please enter your First Name <br />" ;
+            $isError = true ;
+        }
+
+        if(empty($lastname)){
+            $message .= " Please enter your Last Name  <br />" ;
+            $isError = true ;
+
+        }
+
+        if(empty($username)){
+            $message .= " Please enter your username <br />" ;
+            $isError = true ;
+        } 
+
+        if(empty($pass1)){
+            $message .= " Please enter your password  <br /> " ;
+            $isError = true ;
+        } else if(strlen($pass1) < 8) {
+            $message .= " The password should be more than 8 characters <br />" ;
+            $isError = true ;
+        }
+
+        if(empty($pass2)){
+            $message .= "Please Re-type your password <br />" ;
+            $isError = true ;
+        } 
+
+        if($pass1 != $pass2){
+            $message .= " Please make sure your password matches <br />" ;
+            $isError = true ; 
+        }
+
+        if(empty($email)){
+            $message .= "Please enter your e-mail <br />" ;
+            $isError = true ;
+        } else  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $message .= " Please type your e-mail correctly <br />" ;
+            $isError = true ;
+        }
+
+
+         if ($isError == false)
+         {
+             global $con;
+             $query = $con->prepare("INSERT INTO users
+             SET 
+             firstName = ? ,
+             lastName =? ,
+             email = ? ,
+             password = ? ,
+             username = ?,
+             userType_id = 2 ;  ");
+
+            $query->execute(
+                array(
+                    $firstname , $lastname , $email , $pass1 , $username
+                ));
+        }
+    }
+   ?>
+
+
+
     <div class="contact register-content-area">
             <div class="container">
                 <div class="row">
@@ -69,10 +145,11 @@
                                         <div class="col-xl-12 col-lg-12">
 
                                         <div class="rd-form rd-mailform form-lg" novalidate="novalidate">
-                                        <div class="alert alert-danger hide_alert" id="erralert" style="display:none;">
-                                            <strong> </strong>
+                                        <div class="alert alert-danger hide_alert <?php
+                                          if($isError == true) { echo'show_alert';} ?>" id="erralert" style="display:none;">
+                                        <strong> <?php echo $message ?> </strong>
                                         </div>
-                                            <form class="contact-form">
+                                            <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                                                 <div class="row">
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
@@ -129,8 +206,8 @@
                                                 </div>
                                             </form>
                                         </div>
-                                    </div>
-                           </div>
+                                 </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,6 +244,17 @@
     <!-- register validation -->
     <script src="assets\js\register.js"></script>
     <!-- sweet alert -->
-    <script src="assets/jssweetalert2.min.js"></script>
+    <script src="assets/js/sweetalert2.min.js"></script>
+    <script>
+    /*$(document).ready(function() {
+        $("#btn").click(function() {
+            Swal(
+             'Successfully Registered!',
+             ' you have been successfully registered go and login now .',
+             'success'
+            )
+        });
+    });*/
+    </script>
 </body>
 </html>

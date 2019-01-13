@@ -94,7 +94,7 @@ var validateform = function(event) {
     $("#erralert").html(errtext);
     event.preventDefault();
     window.location.hash = '#erralert';
-  }
+   }
 
 }
 
