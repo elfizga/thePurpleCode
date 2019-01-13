@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="assets\css\style.css">
     <!-- responsive -->
     <link rel="stylesheet" href="assets\css\responsive.css">
+    <!-- sweetalert -->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -155,5 +158,7 @@
     <script src="assets\js\wow.min.js"></script>
     <!-- main -->
     <script src="assets\js\main.js"></script>
+    <!-- sweet alert -->
+    <script src="assets/jssweetalert2.min.js"></script>
 </body>
 </html>
