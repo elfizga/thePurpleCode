@@ -104,4 +104,52 @@ btn.addEventListener("click", validateform, true);
 
 function validateEmail(email) {
 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-return re.test(String(email).toLowerCase()); }
+return re.test(String(email).toLowerCase()); } 
+
+ // ajax validation request
+
+$(document).ready(function() {
+
+    $("#regForm").submit(function(e) {
+        e.preventDefault();
+        // Get form
+        var form = $(this)[0];
+        $.ajax({
+            type:'POST',
+            url: 'php_validation.php',
+            data: $(this).serialize()
+        })
+        .done(function(response){
+            if (response.trim() === "error"){  
+                Swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                  }) 
+            } else {
+                Swal(
+                    'Successfully Registered!',
+                    ' you have been successfully registered go and login now .',
+                    'success'
+                   )
+                   $("#InputFirstname").val("");
+                   $("#InputLastname").val("");
+                   $("#InputUsername").val("");
+                   $("#InputPassword").val("");
+                   $("#InputMail").val("");
+                   $("#InputRetypepassword").val("");
+
+                }
+                
+           })
+
+        .fail(function(response){
+            Swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+             })
+         });
+      });
+
+ });

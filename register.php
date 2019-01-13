@@ -55,75 +55,6 @@
     <?php
     $isError = false ;
     $message ="";
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        $firstname=$_POST["InputFirstname"];
-        $lastname=$_POST["InputLastname"];
-        $username=$_POST["InputUsername"];
-        $pass1=$_POST["InputPassword"];
-        $pass2=$_POST["InputRetypepassword"];
-        $email=$_POST["InputMail"];
-
-        if(empty($firstname)){
-            $message .= " Please enter your First Name <br />" ;
-            $isError = true ;
-        }
-
-        if(empty($lastname)){
-            $message .= " Please enter your Last Name  <br />" ;
-            $isError = true ;
-
-        }
-
-        if(empty($username)){
-            $message .= " Please enter your username <br />" ;
-            $isError = true ;
-        } 
-
-        if(empty($pass1)){
-            $message .= " Please enter your password  <br /> " ;
-            $isError = true ;
-        } else if(strlen($pass1) < 8) {
-            $message .= " The password should be more than 8 characters <br />" ;
-            $isError = true ;
-        }
-
-        if(empty($pass2)){
-            $message .= "Please Re-type your password <br />" ;
-            $isError = true ;
-        } 
-
-        if($pass1 != $pass2){
-            $message .= " Please make sure your password matches <br />" ;
-            $isError = true ; 
-        }
-
-        if(empty($email)){
-            $message .= "Please enter your e-mail <br />" ;
-            $isError = true ;
-        } else  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $message .= " Please type your e-mail correctly <br />" ;
-            $isError = true ;
-        }
-
-
-         if ($isError == false)
-         {
-             global $con;
-             $query = $con->prepare("INSERT INTO users
-             SET 
-             firstName = ? ,
-             lastName =? ,
-             email = ? ,
-             password = ? ,
-             username = ?,
-             userType_id = 2 ;  ");
-
-            $query->execute(
-                array(
-                    $firstname , $lastname , $email , $pass1 , $username
-                ));
-        }
-    }
    ?>
 
 
@@ -149,7 +80,7 @@
                                           if($isError == true) { echo'show_alert';} ?>" id="erralert" style="display:none;">
                                         <strong> <?php echo $message ?> </strong>
                                         </div>
-                                            <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                                            <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="regForm">
                                                 <div class="row">
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
@@ -201,7 +132,7 @@
                                                     </div>
                             
                                                     <div class="col-xl-6 col-lg-6">
-                                                        <button type="submit" class="submit-button" id="btn">Submit Now</button>
+                                                        <button type="submit" class="submit-button" id="btn"> Submit Now </button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -246,15 +177,6 @@
     <!-- sweet alert -->
     <script src="assets/js/sweetalert2.min.js"></script>
     <script>
-    /*$(document).ready(function() {
-        $("#btn").click(function() {
-            Swal(
-             'Successfully Registered!',
-             ' you have been successfully registered go and login now .',
-             'success'
-            )
-        });
-    });*/
-    </script>
+</script>
 </body>
 </html>
