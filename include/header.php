@@ -1,3 +1,5 @@
+<?php include 'include/db_connection.php'; ?>
+
  <!-- header begin-->
  <header class="header">
         <div class="header-bottom">

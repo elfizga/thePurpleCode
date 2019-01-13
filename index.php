@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<?php include 'include/db_connection.php'; ?>
+
+<!DOCTYPE html>
 <html lang="zxx">
 
     <head>
