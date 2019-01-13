@@ -67,42 +67,48 @@
                             
                                     <div class="row">
                                         <div class="col-xl-12 col-lg-12">
+
+                                        <div class="rd-form rd-mailform form-lg" novalidate="novalidate">
+                                        <div class="alert alert-danger hide_alert" id="erralert" style="display:none;">
+                                            <strong> </strong>
+                                        </div>
                                             <form class="contact-form">
                                                 <div class="row">
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
                                                             <label for="InputFirstname">First Name<span class="requred">*</span></label>
-                                                            <input type="text" class="form-control" id="InputFirstname" placeholder="Enter Your Name" required="">
+                                                            <input type="text" class="form-control" id="InputFirstname" name="InputFirstname" placeholder="Enter Your Name" required="">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
                                                             <label for="InputLastname">Last Name<span class="requred">*</span></label>
-                                                            <input type="text" class="form-control" id="InputLastname" placeholder="Enter Your Last Name" required="">
+                                                            <input type="text" class="form-control" id="InputLastname" name="InputLastname" placeholder="Enter Your Last Name" >
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
                                                             <label for="InputMail">E-mail<span class="requred">*</span></label>
-                                                            <input type="email" class="form-control" id="InputMail" placeholder="Enter Your E-mail" required="">
+                                                            <input type="email" class="form-control" id="InputMail" name="InputMail" placeholder="Enter Your E-mail" >
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
                                                             <label for="InputUsername">User Name<span class="requred">*</span></label>
-                                                            <input type="text" class="form-control" id="InputUsername" placeholder="Enter Your Username" required="">
+                                                            <input type="text" class="form-control" id="InputUsername" name="InputUsername" placeholder="Enter Your Username" >
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
                                                             <label for="InputPassword">Password<span class="requred">*</span></label>
-                                                            <input type="password" class="form-control" id="InputPassword" placeholder="Enter Your Password" required="">
+                                                            <input type="password" class="form-control" id="InputPassword" name="InputPassword" placeholder="Enter Your Password" >
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
-                                                            <label for="InputRetypepassword">Re-type Password<span class="requred">*</span></label>
-                                                            <input type="password" class="form-control" id="InputRetypepassword" placeholder="Re-type Password" required="">
+                                                            <label for="InputRetypepassword">Re-type Password<span class="requred">*</span>
+                                                            </label><label id="lab"> </label>
+                                                            <input type="password" class="form-control" id="InputRetypepassword" name="InputRetypepassword" placeholder="Re-type Password" >
                                                         </div>
                                                     </div>
                             
@@ -118,7 +124,7 @@
                                                     </div>
                             
                                                     <div class="col-xl-6 col-lg-6">
-                                                        <button type="submit" class="submit-button">Submit Now</button>
+                                                        <button type="submit" class="submit-button" id="btn">Submit Now</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -158,6 +164,8 @@
     <script src="assets\js\wow.min.js"></script>
     <!-- main -->
     <script src="assets\js\main.js"></script>
+    <!-- register validation -->
+    <script src="assets\js\register.js"></script>
     <!-- sweet alert -->
     <script src="assets/jssweetalert2.min.js"></script>
 </body>
