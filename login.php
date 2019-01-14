@@ -59,18 +59,18 @@
                                         <h2>Login On <span>Your Account</span></h2>
                                     </div>
                                 </div>
-                                <form class="contact-form">
+                                <form class="contact-form" method="post" action="login1.php">
                                     <div class="row">
                                         <div class="col-xl-12 col-lg-12">
                                             <div class="form-group">
-                                                <label for="InputName">Name<span class="requred">*</span></label>
-                                                <input type="text" class="form-control" id="InputName" placeholder="Enter Your Name" required="">
+                                                <label for="InputName">Email<span class="requred">*</span></label>
+                                                <input type="email" class="form-control" id="InputName" placeholder="Enter Your email" required="" name="email">
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12">
                                             <div class="form-group">
-                                                <label for="InputAmount">E-mail<span class="requred">*</span></label>
-                                                <input type="email" class="form-control" id="InputAmount" placeholder="Enter Your E-mail Address" required="">
+                                                <label for="InputAmount">Password<span class="requred">*</span></label>
+                                                <input type="password" class="form-control" id="InputAmount" placeholder="Enter Your password" required="" name="password">
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12">
@@ -87,7 +87,7 @@
                                         <div class="col-xl-12 col-lg-12">
                                             <div class="row d-flex">
                                                 <div class="col-xl-6 col-lg-6">
-                                                    <button type="submit" class="login-button">Send Now</button>
+                                                    <button type="submit" class="login-button">login</button>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 d-flex align-items-center">
                                                     <a href="#" class="forgetting-password">Forgot Password?</a>
