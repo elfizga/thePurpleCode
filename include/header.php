@@ -1,5 +1,7 @@
 <?php include 'include/db_connection.php'; ?>
-
+<?php
+    session_start();
+?>
  <!-- header begin-->
  <header class="header">
         <div class="header-bottom">
@@ -52,15 +54,26 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="col-xl-1 col-lg-1 d-flex align-items-center">
-                        <div class="join-us">
-                            <a href="register.php"> sign up </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-1 col-lg-1 d-flex align-items-center">
-                         <div class="join-us">
-                            <a href="login.php"> login </a>
-                        </div>
+                    <?php
+                        if(isset($_SESSION['userId']) && $_SESSION['userId'] > 0) {
+                            if($_SESSION['userType'] == 1) {
+                                     echo 
+                                    '<div class="col-xl-1 col-lg-1 d-flex align-items-center"> <div class="join-us"> <a href="post-aBlog.php"> Post a blog </a> </div></div>';
+                                } else {
+                                     echo ''; }
+                                     ?>
+                             <?php  } else {
+                                     echo ' <div class="col-xl-1 col-lg-1 d-flex align-items-center"> <div class="join-us"> <a href="register.php"> sign up </a> </div> </div>';
+                             } ?>
+
+                     <?php
+                        if(isset($_SESSION['userId']) && $_SESSION['userId'] > 0) {
+                                     echo 
+                                    ' <div class="col-xl-1 col-lg-1 d-flex align-items-center"> <div class="join-us"> <a href="logout.php"> Log out </a> </div>';
+                                    } else {
+                                     echo 
+                                    ' <div class="col-xl-1 col-lg-1 d-flex align-items-center"> <div class="join-us"> <a href="login.php"> Login </a> </div>';
+                                     } ?>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+
 <?php
  $servername = "mysql:host=localhost;dbname=thepurplecode";
  $username = "root";

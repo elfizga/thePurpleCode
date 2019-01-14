@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 ob_start();
@@ -31,7 +30,7 @@ ob_start();
         $result = $query->fetch();
         if($count > 0) {
             $_SESSION['userId'] = $result['user_id'];
-            $_SESSION['userType'] = $result['userType_ID'];
+            $_SESSION['userType'] = $result['userType_id'];
             header("Location: index.php");
         } else {
             echo " make sure your email and password is right ";
