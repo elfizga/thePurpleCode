@@ -147,14 +147,15 @@
     </div>
     <!-- page title end -->
 
-     <?php include 'include/footer.php';?>
+    </div>
+     
 
     <!-- scroll top button begin -->
     <div class="scroll-to-top">
         <a><i class="fas fa-long-arrow-alt-up"></i></a>
     </div>
     <!-- scroll top button end -->
-
+<?php include 'include/footer.php';?>
 
     <!-- jquery -->
     <script src="assets\js\jquery.js"></script>
