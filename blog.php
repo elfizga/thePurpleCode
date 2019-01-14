@@ -63,92 +63,9 @@
     <div class="blog-post blog-page-content">
         <div class="container">
             <div class="row">
-                <div class="col-xl-8 col-lg-8">
+                <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="single-blog">
-                                <div class="part-img">
-                                    <img src="assets\img\blog-post-1.jpeg" alt="">
-                                </div>
-                                <div class="part-text">
-                                    <h3><a href="blog-details.php">Blog Single Image Post</a></h3>
-                                    <h4>
-                                        <span class="admin">By Admin </span>.
-                                        <span class="date">12 Nov, 2018 </span>.
-                                        <span class="category">in Web Design </span>
-                                    </h4>
-                                    <p>Lorem Ipsum is simply dummy text of the rinting and
-                                        typesetting industry. Lorem Ipsum has been the industry's standard
-                                        dummy ...</p>
-                                    <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="single-blog">
-                                <div class="part-img">
-                                    <img src="assets\img\blog-post-2.jpeg" alt="">
-                                </div>
-                                <div class="part-text">
-                                    <h3><a href="blog-details.php">Printer Took A Galley</a></h3>
-                                    <h4>
-                                        <span class="admin">By Admin </span>.
-                                        <span class="date">12 Nov, 2018 </span>.
-                                        <span class="category">in Web Design </span>
-                                    </h4>
-                                    <p>Lorem Ipsum is simply dummy text of the rinting and
-                                        typesetting industry. Lorem Ipsum has been the industry's standard
-                                        dummy ...</p>
-                                        <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="single-blog">
-                                <div class="part-img">
-                                    <img src="assets\img\blog-post-3.jpeg" alt="">
-                                </div>
-                                <div class="part-text">
-                                    <h3><a href="blog-details.php">Reader Will Be Distracted</a></h3>
-                                    <h4>
-                                        <span class="admin">By Admin </span>.
-                                        <span class="date">12 Nov, 2018 </span>.
-                                        <span class="category">in Web Design </span>
-                                    </h4>
-                                    <p>Lorem Ipsum is simply dummy text of the rinting and
-                                        typesetting industry. Lorem Ipsum has been the industry's standard
-                                        dummy ...</p>
-                                        <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="single-blog">
-                                <div class="part-img">
-                                    <img src="assets\img\blog-post-4.jpeg" alt="">
-                                </div>
-                                <div class="part-text">
-                                    <h3><a href="blog-details.php">There Are Variations</a></h3>
-                                    <h4>
-                                        <span class="admin">By Admin </span>.
-                                        <span class="date">12 Nov, 2018 </span>.
-                                        <span class="category">in Web Design </span>
-                                    </h4>
-                                    <p>Lorem Ipsum is simply dummy text of the rinting and
-                                        typesetting industry. Lorem Ipsum has been the industry's standard
-                                        dummy ...</p>
-                                        <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-12">
-
+                    <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="sidebar">
                                 <div class="widget widget_search">
                                     <form name="search_form" class="sayit_search_form" id="search_form">
@@ -156,77 +73,46 @@
                                         <input class="sayit_field_search" name="s" placeholder="Search" title="Search the site..." form="search_form">
                                         <div class="clear"></div>
                                     </form>
-                                </div>
-
-
-
-                                <div class="widget widget-popular-post">
-                                    <h6 class="widgettitle">
-                                        <span>Popular Posts</span>
-                                    </h6>
-                                
-                                    <div class="single-post">
-                                        <div class="part-img">
-                                            <img src="assets\img\popular-post-1.jpeg" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <h4><a href="#">There are many lorem ipsum</a></h4>
-                                            <h5>29.08.18 Sat</h5>
-                                        </div>
-                                    </div>
-                                
-                                    <div class="single-post">
-                                        <div class="part-img">
-                                            <img src="assets\img\popular-post-1.jpeg" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <h4><a href="#">There are many lorem ipsum</a></h4>
-                                            <h5>29.08.18 Sat</h5>
-                                        </div>
-                                    </div>
-                                
-                                    <div class="single-post">
-                                        <div class="part-img">
-                                            <img src="assets\img\popular-post-1.jpeg" alt="">
-                                        </div>
-                                        <div class="part-text">
-                                            <h4><a href="#">There are many lorem ipsum</a></h4>
-                                            <h5>29.08.18 Sat</h5>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="widget widget_tag_cloud">
-                                    <h6 class="widgettitle">
-                                        <span>Keywords</span>
-                                    </h6>
-                                
-                                    <div class="tagcloud">
-                                        <a href="#">Service</a>
-                                        <a href="#">Digital</a>
-                                        <a href="#">All</a>
-                                        <a href="#">Marketing</a>
-                                        <a href="#">Agency</a>
-                                        <a href="#">Tools</a>
-                                        <a href="#">Inbound</a>
-                                        <a href="#">You</a>
-                                        <a href="#">Need</a>
-                                        <a href="#">USA</a>
-                                        <a href="#">Success</a>
-                                        <a href="#">Thefor</a>
-                                    </div>
-                                </div>
+                            </div>
                     </div>
-                </div>
+                    </div>
+                    <?php 
+                        $sql = "
+                            SELECT 
+                            posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
+                            users.firstName , users.lastName , specializations.spec_name 
+                            FROM posts 
+                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                            INNER JOIN users ON users.user_id = posts.user_id ORDER BY post_id DESC ";
+                        global $con;
+                        $query = $con->prepare($sql);
+                        $query->execute();
+                        $results = $query->fetchAll();
+                        foreach($results as $result) { ?>
+                        <div class="col-xl-4 col-lg-4 col-md-4">
+                            <div class="single-blog">
+                                <div class="part-img">
+                                    <img src="assets\img\<?php echo $result['post_image']; ?>" alt="">
+                                </div>
+                                <div class="part-text">
+                                    <h3><a href="blog-details.php"> <?php echo $result['post_title']; ?> </a></h3>
+                                    <h4>
+                                        <span class="admin">By <?php echo $result['firstName'] . ' ' . $result['lastName']; ?></span>.
+                                        <span class="date"><?php echo $result['add_date']; ?> </span>.
+                                        <span class="category">in <?php echo $result['spec_name']; ?> </span>
+                                    </h4>
+                                    <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read This Post</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+             </div>   
+            </div> 
             </div>
-    
-            
         </div>
     </div>
     <!-- blog post end -->
-
     <?php include 'include/footer.php';?>
-
     <!-- scroll top button begin -->
     <div class="scroll-to-top">
         <a><i class="fas fa-long-arrow-alt-up"></i></a>
