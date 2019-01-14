@@ -34,7 +34,7 @@ ob_start();
             $_SESSION['userType'] = $result['userType_ID'];
             header("Location: index.php");
         } else {
-            echo " تأكد من البريد الإلكتروني او كلمة المررور ";
+            echo " make sure your email and password is right ";
         }
 
 }else {
