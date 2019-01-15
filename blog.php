@@ -59,13 +59,69 @@
     </div>
     <!-- page title end -->
 
-    <!-- blog post begin-->
     <div class="blog-post blog-page-content">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="col-xl-8 col-lg-8">
                     <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        
+                        <?php 
+                        if(isset($_GET['id'])) {
+                            $sql = "SELECT 
+                            posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
+                            users.firstName , users.lastName , specializations.spec_name 
+                            FROM posts 
+                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                            INNER JOIN users ON users.user_id = posts.user_id WHERE posts.spec_id = ? ORDER BY post_id DESC";
+                            global $con;
+                            $query = $con->prepare($sql);
+                            $query->execute(array($_GET['id']));
+                        } else {
+                            $sql = "
+                            SELECT 
+                            posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
+                            users.firstName , users.lastName , specializations.spec_name 
+                            FROM posts 
+                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                            INNER JOIN users ON users.user_id = posts.user_id ORDER BY post_id DESC ";
+                            global $con;
+                            $query = $con->prepare($sql);
+                            $query->execute();
+                        }
+                        
+                        
+                        $results = $query->fetchAll();
+                        if(count($results) > 0) {
+                            foreach($results as $result) { ?>
+                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                    <div class="single-blog">
+                                        <div class="part-img">
+                                            <img src="assets\img\<?php echo $result['post_image']; ?>" alt="">
+                                        </div>
+                                        <div class="part-text">
+                                            <h3><a href="blog-details.php?blogId=<?php echo $result['post_id']; ?>" > <?php echo $result['post_title']; ?> </a></h3>
+                                            <h4>
+                                                <span class="admin">By <?php echo $result['firstName'] . ' ' . $result['lastName']; ?></span>.
+                                                <span class="date"><?php echo $result['add_date']; ?> </span>.
+                                                <span class="category">in <?php echo $result['spec_name']; ?> </span>
+                                            </h4>
+                                            <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read This Post</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php }
+                        } else { ?>
+
+                            <div class="alert alert-danger col-sm-12">No Posts Found</div>
+
+                        <?php } ?>
+                        
+
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12">
+
                     <div class="sidebar">
                                 <div class="widget widget_search">
                                     <form name="search_form" class="sayit_search_form" id="search_form">
@@ -73,45 +129,70 @@
                                         <input class="sayit_field_search" name="s" placeholder="Search" title="Search the site..." form="search_form">
                                         <div class="clear"></div>
                                     </form>
-                            </div>
-                    </div>
-                    </div>
-                    <?php 
-                        $sql = "
-                            SELECT 
-                            posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
-                            users.firstName , users.lastName , specializations.spec_name 
-                            FROM posts 
-                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
-                            INNER JOIN users ON users.user_id = posts.user_id ORDER BY post_id DESC ";
-                        global $con;
-                        $query = $con->prepare($sql);
-                        $query->execute();
-                        $results = $query->fetchAll();
-                        foreach($results as $result) { ?>
-                        <div class="col-xl-4 col-lg-4 col-md-4">
-                            <div class="single-blog">
-                                <div class="part-img">
-                                    <img src="assets\img\<?php echo $result['post_image']; ?>" alt="">
                                 </div>
-                                <div class="part-text">
-                                    <h3><a href="blog-details.php"> <?php echo $result['post_title']; ?> </a></h3>
-                                    <h4>
-                                        <span class="admin">By <?php echo $result['firstName'] . ' ' . $result['lastName']; ?></span>.
-                                        <span class="date"><?php echo $result['add_date']; ?> </span>.
-                                        <span class="category">in <?php echo $result['spec_name']; ?> </span>
-                                    </h4>
-                                    <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read This Post</a>
+
+                                <div class="widget widget_categories">
+                                    <h6 class="widgettitle"><span>Categories</span></h6>
+
+                                    <ul>
+                                    <?php 
+                                        $sql = "
+                                            SELECT * FROM specializations;
+                                             ";
+                                        global $con;
+                                        $query = $con->prepare($sql);
+                                        $query->execute();
+                                        $results = $query->fetchAll();
+                                        foreach($results as $result) { ?>
+                                            <li><a href="blog.php?id=<?php echo $result['spec_id']; ?>"><?php echo $result['spec_name']; ?></a></li>
+                                        <?php } ?>
+                                        
+                                    </ul>
                                 </div>
-                            </div>
+
+                                <div class="widget widget-popular-post">
+                            <h6 class="widgettitle">
+                                <span> Recent Posts</span>
+                            </h6>
+                            <?php 
+                                        $sql = "
+                                            SELECT * FROM posts ORDER BY post_id DESC LIMIT 5;
+                                             ";
+                                        global $con;
+                                        $query = $con->prepare($sql);
+                                        $query->execute();
+                                        $results = $query->fetchAll();
+                                        foreach($results as $result) { ?>
+                                                <div class="single-post">
+                                                    <div class="part-img">
+                                                        <img src="assets\img\<?php echo $result['post_image'];?>" alt="">
+                                                    </div>
+                                                    <div class="part-text">
+                                                        <h4><a href="blog-details.php?blogId=<?php echo $result['post_id']; ?>" > <?php
+                                                        $title = ""; 
+                                                            if(strlen($result['post_title']) > 15) {
+                                                                $title = substr($result['post_title'], 0, 21) . "...";
+                                                            } else {
+                                                                $title = $result['post_title'];
+                                                            }
+                                                            $title = strtolower($title);
+                                                            $title = ucfirst($title);
+                                                        echo $title; ?> </a></h4>
+                                                        <h5><?php echo $result['add_date']; ?></h5>
+                                                    </div>
+                                                </div>                                        
+                            <?php } ?>
                         </div>
-                    <?php } ?>
-             </div>   
-            </div> 
+
+                                
+                    </div>
+                </div>
             </div>
+    
+            
         </div>
     </div>
-    <!-- blog post end -->
+
     <?php include 'include/footer.php';?>
     <!-- scroll top button begin -->
     <div class="scroll-to-top">
