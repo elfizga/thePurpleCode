@@ -52,7 +52,65 @@
     <!-- page title begin-->
     <div class="page-title register-page">
     <!-- register begin-->
-    
+    <?php
+    $isError = false ;
+     $message ="";
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $title = $_POST['title'];
+        $category = $_POST['category'];
+        $desc = $_POST['desc'];
+        $photo = $_FILES['photo'];
+
+        if(empty($title)){
+            echo "error in title";
+            $message .= " please enter the title<br />" ;
+            $isError = true ;
+        }
+        if(empty($category)){
+            echo "error in category";
+            $message .= " please enter the category of the post<br />" ;
+            $isError = true ;
+        }
+        if(empty($desc)){
+            echo "error in desc";
+            $message .= " please enter the description of the blog<br />" ;
+            $isError = true ;
+        }
+        if( !empty($photo['name']) ) {
+            $imageName = rand(0, 100000) . "_" . $photo['name'];
+            move_uploaded_file($photo['tmp_name'], "images/" . $imageName);
+          } else {
+            $imageName = "blog-post-1.jpg";
+          } 
+
+          if ($isError == false && isset($_SESSION['userId']) ){
+            global $con;
+
+            $query1 = $con->prepare(
+                "SELECT user_id FROM users WHERE user_id = ?"
+            );
+
+            $query1->execute(array( $_SESSION['userId'] ));
+            $result = $query1->fetch();
+
+            $id = $result['user_id'];
+
+            $query = $con->prepare("INSERT INTO posts
+            SET 
+            post_title = ? ,
+            post_desc =? ,
+            post_image = ? ,
+            spec_id =? ,
+            user_id =?
+            ;");
+
+        $query->execute(
+             array( $title , $desc , $imageName, $spec, $id   ));
+          }
+
+    }
+    ?>
 
 
     <div class="contact register-content-area">
@@ -72,10 +130,11 @@
                                         <div class="col-xl-12 col-lg-12">
 
                                         <div class="rd-form rd-mailform form-lg" novalidate="novalidate">
-                                        <div class="alert alert-danger hide_alert" id="erralert" style="display:none;">
-                                        <strong> </strong>
+                                        <div class="alert alert-danger hide_alert<?php
+                         if($isError == true) { echo'show_alert';} ?>" id="erralert" style="display:none;" >
+                                        <strong><?php echo $message ?> </strong>
                                         </div>
-                                            <form class="contact-form" action="" method="post" id="regForm">
+                                            <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="postAblogForm" enctype="multipart/form-data">
                                                 <div class="row">
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">
@@ -115,11 +174,17 @@
                                                             <textarea class="form-control" id="desc" name="desc" ></textarea>
                                                         </div>
                                                     </div>
+                                                    <div class="col-xl-12 col-lg-12">
+                                                    <div class="custom-file">
+                                                         <input name="photo" type="file" class="custom-file-input" id="customFile"  accept="image/*" form="postAblogForm">
+                                                                 <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                </div>
+                                                    </div>
                             
                                                   
                             
-                                                    <div class="col-xl-6 col-lg-6">
-                                                        <button type="submit" class="submit-button" id="btn"> Submit Now </button>
+                                                    <div class="col-xl-8 col-lg-8">
+                                                        <button type="submit" class="submit-button" id="btn"> Post </button>
                                                     </div>
                                                 </div>
                                             </form>

@@ -70,12 +70,13 @@
                                 <div class="widget widget_search">
                                     <form name="search_form" class="sayit_search_form" id="search_form">
                                         <span class="sayit_icon_search"><i class="fa fa-search"></i></span>
-                                        <input class="sayit_field_search" name="s" placeholder="Search" title="Search the site..." form="search_form">
+                                        <input class="sayit_field_search" id="myInput" type="text" name="employer" form="search_form" onkeyup="myFunction()">
                                         <div class="clear"></div>
                                     </form>
                             </div>
                     </div>
                     </div>
+                   
                     <?php 
                         $sql = "
                             SELECT 
@@ -89,6 +90,8 @@
                         $query->execute();
                         $results = $query->fetchAll();
                         foreach($results as $result) { ?>
+                        
+                      
                         <div class="col-xl-4 col-lg-4 col-md-4">
                             <div class="single-blog">
                                 <div class="part-img">
@@ -102,6 +105,7 @@
                                         <span class="category">in <?php echo $result['spec_name']; ?> </span>
                                     </h4>
                                     <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read This Post</a>
+                                 
                                 </div>
                             </div>
                         </div>
@@ -135,5 +139,27 @@
     <script src="assets\js\wow.min.js"></script>
     <!-- main -->
     <script src="assets\js\main.js"></script>
+    <script>
+    function myFunction() {
+    // Declare variables 
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      } 
+    }
+  }
+    </script>
 </body>
 </html>
