@@ -73,7 +73,7 @@
                                     } else {
                                      echo 
                                     ' <div class="col-xl-1 col-lg-1 d-flex align-items-center"> <div class="join-us"> <a href="login.php"> Login </a> </div>';
-                                     } ?>
+                         } ?>
                     </div>
                 </div>
             </div>

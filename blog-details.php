@@ -68,44 +68,36 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12">
                             <div class="single-blog blog-details">
-                                <div class="post-shadow">
+                            <?php  
+                                if(isset($_GET['blogId'])){
+                                $id=$_GET['blogId'];
+                                $sql = "
+                                            SELECT 
+                                            posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
+                                            users.firstName , users.lastName , specializations.spec_name 
+                                            FROM posts 
+                                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                                            INNER JOIN users ON users.user_id = posts.user_id WHERE posts.post_id = ? ";
+                                            global $con;
+                                            $query = $con->prepare($sql);
+                                            $query->execute(array($id));
+                                            $result = $query->fetch();
+                                            ?>
+                                    <div class="post-shadow">
                                     <div class="part-img">
-                                        <img src="assets\img\blog-details.jpeg" alt="">
+                                        <img src="assets\img\<?php echo $result['post_image']; ?>"alt="">
                                     </div>
                                     <div class="part-text">
-                                        <h3><a href="blog-details.php">Blog Single Image Post</a></h3>
+                                        <h3><?php echo $result['post_title']; ?></h3>
                                         <h4>
-                                            <span class="admin">By Admin </span>.
-                                            <span class="date">12 Nov, 2018 </span>.
-                                            <span class="category">in Web Design </span>
+                                            <span class="admin">By  <?php echo $result['firstName'] . ' ' . $result['lastName']; ?> </span>.
+                                            <span class="date"> <?php echo $result['add_date']; ?> </span>.
+                                            <span class="category">in <?php echo $result['spec_name']; ?> </span>
                                         </h4>
-                                        <p>We are full service Digital Marketing Agency all the tools you need for inbound success.
-                                            With this module theres no
-                                            need to go another Digital
-                                            Marketing Agency all the tools you need for inbound success. With this module theres no
-                                            need to go another day. We are
-                                            full Marketing Agency
-                                            all the tools you need for inbound success. With this module theres no need to go another
-                                            day.</p>
+                                        <p> <?php echo $result['post_desc']; ?>  </p>
                                     
-                                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                                            of classical Latin
-                                            literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor
-                                            at Hampden-Sydney College
-                                            in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum
-                                            passage, and going through
-                                            the cites of the word in classical literature, discovered the undoubtable source. Lorem
-                                            Ipsum comes from sections
-                                            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
-                                            Cicero, written in 45 BC.
-                                            This book is a treatise on the theory of ethics, very popular during the Renaissance. The
-                                            first line of Lorem Ipsum,
-                                            "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
                                             
                                         <div class="entry-footer">
-                                            <div class="tag">
-                                                <h5>Tag: <a href="#">Blog</a><a href="#">Single</a><a href="#">Image</a><a href="#">Post</a></h5>
-                                            </div>
                                             <div class="share">
                                                 <ul>
                                                     <li class="title">Share:</li>
@@ -120,6 +112,7 @@
                                     
                                     </div>
                                 </div>
+                                <?php } ?>
                                 
                                 <div class="comment-area">
                                     <div class="comment-shadow">
@@ -187,6 +180,7 @@
                                         </form>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -194,87 +188,61 @@
 
                 <div class="col-xl-4 col-lg-4">
                     <div class="sidebar">
-                        <div class="widget widget_search">
-                            <form name="search_form" class="sayit_search_form" id="search_form">
-                                <span class="sayit_icon_search"><i class="fa fa-search"></i></span>
-                                <input class="sayit_field_search" name="s" placeholder="Search" title="Search the site..." form="search_form">
-                                <div class="clear"></div>
-                            </form>
-                        </div>
             
                         <div class="widget widget_categories">
-                            <h6 class="widgettitle"><span>Categories</span></h6>
-            
-                            <ul>
-                                <li><a href="#">Web Design</a></li>
-                                <li><a href="#">App Develop</a></li>
-                                <li><a href="#">UX Design</a></li>
-                                <li><a href="#">Plugins Develop</a></li>
-                                <li><a href="#">Branding</a></li>
-                                <li><a href="#">Print Design</a></li>
-                                <li><a href="#">Media</a></li>
-                            </ul>
+                                    <h6 class="widgettitle"><span>Categories</span></h6>
+                                    <ul>
+                                    <?php 
+                                        $sql = "
+                                            SELECT * FROM specializations;
+                                             ";
+                                        global $con;
+                                        $query = $con->prepare($sql);
+                                        $query->execute();
+                                        $results = $query->fetchAll();
+                                        foreach($results as $result) { ?>
+                                            <li><a href="blog.php?id=<?php echo $result['spec_id']; ?>"><?php echo $result['spec_name']; ?></a></li>
+                                        <?php } ?>
+                                        
+                                    </ul>
                         </div>
             
                         <div class="widget widget-popular-post">
                             <h6 class="widgettitle">
-                                <span>Popular Posts</span>
+                                <span> Recent Posts </span>
                             </h6>
-            
-                            <div class="single-post">
-                                <div class="part-img">
-                                    <img src="assets\img\popular-post-1.jpeg" alt="">
-                                </div>
-                                <div class="part-text">
-                                    <h4><a href="#">There are many lorem ipsum</a></h4>
-                                    <h5>29.08.18 Sat</h5>
-                                </div>
-                            </div>
-            
-                            <div class="single-post">
-                                <div class="part-img">
-                                    <img src="assets\img\popular-post-1.jpeg" alt="">
-                                </div>
-                                <div class="part-text">
-                                    <h4><a href="#">There are many lorem ipsum</a></h4>
-                                    <h5>29.08.18 Sat</h5>
-                                </div>
-                            </div>
-            
-                            <div class="single-post">
-                                <div class="part-img">
-                                    <img src="assets\img\popular-post-1.jpeg" alt="">
-                                </div>
-                                <div class="part-text">
-                                    <h4><a href="#">There are many lorem ipsum</a></h4>
-                                    <h5>29.08.18 Sat</h5>
-                                </div>
-                            </div>
+                            <?php 
+                                        $sql = "
+                                            SELECT * FROM posts ORDER BY post_id DESC LIMIT 3;
+                                             ";
+                                        global $con;
+                                        $query = $con->prepare($sql);
+                                        $query->execute();
+                                        $results = $query->fetchAll();
+                                        foreach($results as $result) { ?>
+                                                <div class="single-post">
+                                                    <div class="part-img">
+                                                        <img src="assets\img\<?php echo $result['post_image'];?>" alt="">
+                                                    </div>
+                                                    <div class="part-text">
+                                                        <h4><a href="blog-details.php?blogId=<?php echo $result['post_id']; ?>" > <?php
+                                                        $title = ""; 
+                                                            if(strlen($result['post_title']) > 15) {
+                                                                $title = substr($result['post_title'], 0, 21) . "...";
+                                                            } else {
+                                                                $title = $result['post_title'];
+                                                            }
+                                                            $title = strtolower($title);
+                                                            $title = ucfirst($title);
+                                                        echo $title; ?> </a></h4>
+                                                        <h5><?php echo $result['add_date']; ?></h5>
+                                                    </div>
+                                                </div>                                        
+                            <?php } ?>
                         </div>
-            
-                        <div class="widget widget_tag_cloud">
-                            <h6 class="widgettitle">
-                                <span>Tags</span>
-                            </h6>
-            
-                            <div class="tagcloud">
-                                <a href="#">Service</a>
-                                <a href="#">Digital</a>
-                                <a href="#">All</a>
-                                <a href="#">Marketing</a>
-                                <a href="#">Agency</a>
-                                <a href="#">Tools</a>
-                                <a href="#">Inbound</a>
-                                <a href="#">You</a>
-                                <a href="#">Need</a>
-                                <a href="#">USA</a>
-                                <a href="#">Success</a>
-                                <a href="#">Thefor</a>       
-                            </div>
-                        </div>
+
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

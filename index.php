@@ -491,66 +491,48 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-blog">
-                            <div class="part-img">
-                                <img src="assets\img\blog-post-1.jpeg" alt="">
-                            </div>
-                            <div class="part-text">
-                                <h3><a href="blog-details.php"> Blog Single Image Post </a></h3>
-                                <h4>
-                                    <span class="admin">By Admin </span>.
-                                    <span class="date">12 Nov, 2018 </span>.
-                                    <span class="category">in Web Design </span>
-                                </h4>
-                                <p> Lorem Ipsum is simply dummy text of the rinting and
-                                    typesetting industry. Lorem Ipsum has been the industry's standard
-                                    dummy ...</p>
-                                <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read More</a>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-blog">
-                            <div class="part-img">
-                                <img src="assets\img\blog-post-2.jpeg" alt="">
-                            </div>
-                            <div class="part-text">
-                                <h3><a href="blog-details.php">Printer Took A Galley</a></h3>
-                                <h4>
-                                    <span class="admin">By Admin </span>.
-                                    <span class="date">12 Nov, 2018 </span>.
-                                    <span class="category">in Web Design </span>
-                                </h4>
-                                <p>Lorem Ipsum is simply dummy text of the rinting and
-                                    typesetting industry. Lorem Ipsum has been the industry's standard
-                                    dummy ...</p>
-                                <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read More</a>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-blog">
-                            <div class="part-img">
-                                <img src="assets\img\blog-post-3.jpeg" alt="">
-                            </div>
-                            <div class="part-text">
-                                <h3><a href="blog-details.php">Reader Will Distracted</a></h3>
-                                <h4>
-                                    <span class="admin">By Admin </span>.
-                                    <span class="date">12 Nov, 2018 </span>.
-                                    <span class="category">in Web Design </span>
-                                </h4>
-                                <p>Lorem Ipsum is simply dummy text of the rinting and
-                                    typesetting industry. Lorem Ipsum has been the industry's standard
-                                    dummy ...</p>
-                                <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read More</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php 
+                        $sql = "
+                        SELECT 
+                        posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
+                        users.firstName , users.lastName , specializations.spec_name 
+                        FROM posts 
+                        INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                        INNER JOIN users ON users.user_id = posts.user_id ORDER BY post_id DESC LIMIT 3 ";
+                        global $con;
+                        $query = $con->prepare($sql);
+                        $query->execute();
+                        $results = $query->fetchAll();
+                        foreach($results as $result) { ?>
 
+            
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-blog" id="sBlog">
+                            <div class="part-img">
+                                <img src="assets\img\<?php echo $result['post_image']; ?>" alt="">
+                            </div>
+                            <div class="part-text">
+                                <h3><a href="blog-details.php?blogId=<?php echo $result['post_id']; ?>" > <?php echo $result['post_title']; ?> </a></h3>
+                                <h4>
+                                    <span class="admin">By <?php echo $result['firstName'] . ' ' . $result['lastName']; ?> </span>.
+                                    <span class="date"><?php echo $result['add_date']; ?> </span>.
+                                    <span class="category">in <?php echo $result['spec_name']; ?> </span>
+                                </h4>
+                                <p>  <?php
+                                        $desc = ""; 
+                                         if(strlen($result['post_desc']) > 140) {
+                                            $desc = substr($result['post_desc'], 0, 140) . "...";
+                                         } else {
+                                            $desc = $result['post_desc']; 
+                                        }
+                                        $desc = strtolower($desc);
+                                        $desc = ucfirst($desc);
+                                        echo $desc; ?>  </p>
+                                <a class="read-more"href="blog-details.php?blogId=<?php echo $result['post_id']; ?>"><span><i class="fas fa-book-reader"></i></span> Read More </a>
+                            </div>
+                        </div>
+                    </div>
+                  <?php } ?>
                 </div>
             </div>
         </div>
