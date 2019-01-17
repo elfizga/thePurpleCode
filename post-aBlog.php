@@ -134,7 +134,7 @@
                          if($isError == true) { echo'show_alert';} ?>" id="erralert" style="display:none;" >
                                         <strong><?php echo $message ?> </strong>
                                         </div>
-                                            <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="postAblogForm" enctype="multipart/form-data">
+                                            <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="postAblogForm" enctype="multipart/form-data"a>
                                                 <div class="row">
                                                     <div class="col-xl-6 col-lg-6">
                                                         <div class="form-group">

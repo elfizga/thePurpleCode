@@ -113,7 +113,33 @@
                                     </div>
                                 </div>
                                 <?php } ?>
-                                
+
+                                <?php
+                                $stmt = $con->prepare("SELECT 
+										comments.*, users.Username AS Member  
+									FROM 
+										comments
+									INNER JOIN 
+										users 
+									ON 
+										users.user_id = comments.user_id
+									WHERE 
+										post_id = ?
+								
+									");
+
+			// Execute The Statement
+
+			$stmt->execute(array($result['post_id']));
+
+			// Assign To Variable 
+
+			$comments = $stmt->fetchAll();
+
+		?>
+	
+	<?php foreach ($comments as $comment) { ?>
+
                                 <div class="comment-area">
                                     <div class="comment-shadow">
                                     <h3 class="comment-area-title">02 Comments</h3>
@@ -122,69 +148,81 @@
                                                 <img src="assets\img\t2.png" alt="">
                                             </div>
                                             <div class="part-quot">
-                                                <h4>Tamim Ubaidah</h4>
-                                                <h5>29.08.18 Sat - 09:00pm</h5>
-                                                <p>We are full service Digital Marketing Agency all the tools you need for inbound success. With this module
-                                                    theres no
-                                                    need.</p>
+                                                <h4><?php echo $comment['Member'] ?></h4>
+                                                <h5><?php echo $comment['comment_date'] ?></h5>
+                                                <p><?php echo $comment['comment'] ?></p>
                                             </div>
-                                            <button>Reply</button>
-                                        </div>
-                                        
-                                        <div class="single-comment relpy">
-                                            <div class="part-user">
-                                                <img src="assets\img\t3.png" alt="">
-                                            </div>
-                                            <div class="part-quot">
-                                                <h4>Tamim Ubaidah</h4>
-                                                <h5>29.08.18 Sat - 09:00pm</h5>
-                                                <p>We are full service Digital Marketing Agency all the tools you need for inbound success. With this module
-                                                    theres no
-                                                    need.</p>
-                                            </div>
-                                            <button>Reply</button>
-                                        </div>
-                                        
-                                        <div class="single-comment">
-                                            <div class="part-user">
-                                                <img src="assets\img\t2.png" alt="">
-                                            </div>
-                                            <div class="part-quot">
-                                                <h4>Tamim Ubaidah</h4>
-                                                <h5>29.08.18 Sat - 09:00pm</h5>
-                                                <p>We are full service Digital Marketing Agency all the tools you need for inbound success. With this module
-                                                    theres no
-                                                    need.</p>
-                                            </div>
-                                            <button>Reply</button>
+                                           
                                         </div>
                                     </div>
                                 </div>
+                                <?php } ?>
+
+
+                                <?php if (isset($_SESSION['userId'])) { ?>
 
                                 <div class="comment-form">
                                     <div class="form-shadow">
                                         <h3 class="comment-form-title">Leave A Comment</h3>
-                                        <form>
+                                        <form action="<?php echo $_SERVER['PHP_SELF'] . '?blogId=' . $result['post_id'] ?>" method="POST">
                                             <div class="row">
-                                                <div class="col-xl-6 col-lg-6">
-                                                    <input type="text" placeholder="Your Name">
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6">
-                                                    <input type="email" placeholder="Your Email">
-                                                </div>
                                                 <div class="col-xl-12 col-lg-12">
-                                                    <textarea placeholder="Write Your Message"></textarea>
+                                                    <textarea placeholder="Write Your Message" name="comment"></textarea>
                                                 </div>
                                             </div>
-                                            <button>Publish</button>
+                                            <button type="submit">Publish</button>
                                         </form>
-                                    </div>
-                                </div>
+                                        
+                                        <?php 
+					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+						$comment 	= filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
+						$postId 	= $result['post_id'];
+						$userid 	= $_SESSION['userId'];
+
+						if (! empty($comment)) {
+
+							$stmt = $con->prepare("INSERT INTO 
+								comments SET
+                                comment = ?,
+                                post_id = ?,
+                                user_id = ?;");
+
+							$stmt->execute(array(
+
+								 $comment,
+                                 $postId ,
+								 $userid
+
+							));
+
+							if ($stmt) {
+
+								echo '<div class="alert alert-success">Comment Added</div>';
+
+							}
+
+						} else {
+
+							echo '<div class="alert alert-danger">You Must Add Comment</div>';
+
+						}
+
+					}
+				?>
+			</div>
+		</div>
+	<!-- End Add Comment -->
+	<?php } else {
+		echo '<a href="login.php">Login</a> or <a href="register.php">Register</a> To Add Comment';
+	} ?>
                                 
                             </div>
                         </div>
                     </div>
                 </div>
+
+
 
                 <div class="col-xl-4 col-lg-4">
                     <div class="sidebar">
