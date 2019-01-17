@@ -60,7 +60,7 @@
         $title = $_POST['title'];
         $category = $_POST['category'];
         $desc = $_POST['desc'];
-        $photo = $_FILES['photo'];
+        $photo = $_FILES['customFile'];
 
         if(empty($title)){
             echo "error in title";
@@ -79,7 +79,7 @@
         }
         if( !empty($photo['name']) ) {
             $imageName = rand(0, 100000) . "_" . $photo['name'];
-            move_uploaded_file($photo['tmp_name'], "images/" . $imageName);
+            move_uploaded_file($photo['tmp_name'], "assets/img/" . $imageName);
           } else {
             $imageName = "blog-post-1.jpg";
           } 
@@ -106,7 +106,7 @@
             ;");
 
         $query->execute(
-             array( $title , $desc , $imageName, $spec, $id   ));
+             array( $title , $desc , $imageName, $category, $id  ));
           }
 
     }
@@ -176,7 +176,7 @@
                                                     </div>
                                                     <div class="col-xl-12 col-lg-12">
                                                     <div class="custom-file">
-                                                         <input name="photo" type="file" class="custom-file-input" id="customFile"  accept="image/*" form="postAblogForm">
+                                                         <input name="customFile" type="file" class="custom-file-input" id="customFile"  accept="image/*" form="postAblogForm">
                                                                  <label class="custom-file-label" for="customFile">Choose file</label>
                                                                 </div>
                                                     </div>

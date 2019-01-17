@@ -82,6 +82,7 @@
                                             $query = $con->prepare($sql);
                                             $query->execute(array($id));
                                             $result = $query->fetch();
+                                            $post_id = $result['post_id'];
                                             ?>
                                     <div class="post-shadow">
                                     <div class="part-img">
@@ -112,6 +113,7 @@
                                     
                                     </div>
                                 </div>
+                                
                                 <?php } ?>
 
                                 <?php
@@ -129,8 +131,8 @@
 									");
 
 			// Execute The Statement
-
-			$stmt->execute(array($result['post_id']));
+            global $post_id ;
+			$stmt->execute(array($post_id));
 
 			// Assign To Variable 
 
