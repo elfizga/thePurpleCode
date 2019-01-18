@@ -1,5 +1,9 @@
 <?php include 'include/db_connection.php'; ?>
 
+<?php  
+ session_start();
+ if(isset($_SESSION['userId']) && $_SESSION['userType'] == 1) {
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -33,21 +37,12 @@
 </head>
 
 <body>
-    <!-- preloader begin-->
-    <div class="preloader">
-        <div class='loader'>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--text'></div>
-        </div>
-    </div>
-    <!-- preloader end -->
-
-    <?php include 'include/header.php';?>
+    
+    <?php 
+    session_unset();
+    session_destroy();
+    include 'include/header.php';?>
+    
 
     <!-- page title begin-->
     <div class="page-title register-page">
@@ -102,7 +97,8 @@
             post_desc =? ,
             post_image = ? ,
             spec_id =? ,
-            user_id =?
+            user_id =? ,
+            add_date = NOW()
             ;");
 
         $query->execute(
@@ -233,3 +229,6 @@
 </script>
 </body>
 </html>
+<?php } else {
+    echo  " <br> <h1>  sorry ! but you do not have the access to this page . </h1>";
+} ?>
