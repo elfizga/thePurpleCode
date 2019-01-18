@@ -96,7 +96,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                     <div class="single-blog">
                                         <div class="part-img">
-                                            <img src="assets\img\<?php echo $result['post_image']; ?>" alt="">
+                                            <img src="assets\img\<?php echo $result['post_image']; ?>" alt="" height="220">
                                         </div>
                                         <div class="part-text">
                                             <h3><a href="blog-details.php?blogId=<?php echo $result['post_id']; ?>" > <?php echo $result['post_title']; ?> </a></h3>
