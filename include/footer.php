@@ -45,27 +45,27 @@
                     </h2>
                     <ul>
                          <li>
-                            <a href="home.php">
+                            <a href="./index.php">
                                 Home
                             </a>
                         </li>
                         <li>
-                            <a href="about.php">
+                            <a href="./about.php">
                                 About Us
                             </a>
                         </li>
                         <li>
-                            <a href="blog.php">
+                            <a href="./blog.php">
                                 Blog
                             </a>
                         </li>
                         <li>
-                            <a href="contact.php">
+                            <a href="./contact.php">
                                 Contact 
                             </a>
                         </li>
                         <li>
-                            <a href="faq.php">
+                            <a href="./faq.php">
                                 FAQ
                             </a>
                         </li>
