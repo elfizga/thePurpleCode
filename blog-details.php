@@ -115,50 +115,37 @@
                                 </div>
                                 
                                 <?php } ?>
-
-                                <?php
-                                $stmt = $con->prepare("SELECT 
-										comments.*, users.Username AS Member  
-									FROM 
-										comments
-									INNER JOIN 
-										users 
-									ON 
-										users.user_id = comments.user_id
-									WHERE 
-										post_id = ?
-								
-									");
-
-			// Execute The Statement
-            global $post_id ;
-			$stmt->execute(array($post_id));
-
-			// Assign To Variable 
-
-			$comments = $stmt->fetchAll();
-
-		?>
-	
-	<?php foreach ($comments as $comment) { ?>
-
+                                <div class="comments">
                                 <div class="comment-area">
+
+                                <?php 
+                                $stmt = $con->prepare("SELECT comments.*, users.username FROM comments INNER JOIN users ON users.user_id = comments.user_id WHERE post_id = ? ORDER BY comment_id");
+                                $stmt->execute( array($_GET['blogId']) );
+                                $comments = $stmt->fetchAll();
+                                if( !empty($comments) ) { 
+                                    foreach($comments as $comment) {
+                                ?>
+                            
                                     <div class="comment-shadow">
-                                    <h3 class="comment-area-title">02 Comments</h3>
+                                    <h3 class="comment-area-title">Comments</h3>
                                         <div class="single-comment border-top-none">
                                             <div class="part-user">
                                                 <img src="assets\img\t2.png" alt="">
                                             </div>
                                             <div class="part-quot">
-                                                <h4><?php echo $comment['Member'] ?></h4>
+                                                <h4><?php echo $comment['username'] ?></h4>
                                                 <h5><?php echo $comment['comment_date'] ?></h5>
+                                                <input type="hidden" value="<?php echo $comment['comment_id'] ?>" />
                                                 <p><?php echo $comment['comment'] ?></p>
                                             </div>
                                            
                                         </div>
                                     </div>
+                                    <?php }
+                                }
+                                ?>
                                 </div>
-                                <?php } ?>
+                                </div>
 
 
                                 <?php if (isset($_SESSION['userId'])) { ?>
@@ -166,52 +153,18 @@
                                 <div class="comment-form">
                                     <div class="form-shadow">
                                         <h3 class="comment-form-title">Leave A Comment</h3>
-                                        <form action="<?php echo $_SERVER['PHP_SELF'] . '?blogId=' . $result['post_id'] ?>" method="POST">
+                                        <form class="comment_form" action="<?php echo $_SERVER['PHP_SELF'] . '?blogId=' . $_GET['blogId']; ?>" method="POST">
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12">
                                                     <textarea placeholder="Write Your Message" name="comment"></textarea>
+                                                    <input type="hidden" name="post" value="<?php echo $_GET['blogId']; ?>" />
                                                 </div>
+
                                             </div>
                                             <button type="submit">Publish</button>
                                         </form>
                                         
-                                        <?php 
-					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-						$comment 	= filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
-						$postId 	= $result['post_id'];
-						$userid 	= $_SESSION['userId'];
-
-						if (! empty($comment)) {
-
-							$stmt = $con->prepare("INSERT INTO 
-								comments SET
-                                comment = ?,
-                                post_id = ?,
-                                user_id = ?;");
-
-							$stmt->execute(array(
-
-								 $comment,
-                                 $postId ,
-								 $userid
-
-							));
-
-							if ($stmt) {
-
-								echo '<div class="alert alert-success">Comment Added</div>';
-
-							}
-
-						} else {
-
-							echo '<div class="alert alert-danger">You Must Add Comment</div>';
-
-						}
-
-					}
-				?>
+                                      
 			</div>
 		</div>
 	<!-- End Add Comment -->
@@ -312,5 +265,32 @@
     <script src="assets\js\wow.min.js"></script>
     <!-- main -->
     <script src="assets\js\main.js"></script>
+    <script>
+
+    $(".comment_form").submit(function(e) {
+        e.preventDefault();
+        url = "addComment.php";
+        comment = $("textarea").val();
+        post = $("input[type='hidden']").val();
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: 'comment=' + comment + '&post=' + post,
+            success: function(data) {
+                if (data.indexOf("Error") === -1) {
+                    $(".comment_form").parents(".comments").children(".comments-area").append(data);
+                    $(".comment_form textarea").val('');
+                } else {
+                    alert("لا يمكن ترك التعليق فارغا");
+                    console.log('ksjfklsd');
+                }
+                
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError);
+            }
+        });
+    });
+    </script>
 </body>
 </html>
