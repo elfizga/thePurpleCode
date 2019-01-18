@@ -86,7 +86,7 @@
                                             ?>
                                     <div class="post-shadow">
                                     <div class="part-img">
-                                        <img src="assets\img\<?php echo $result['post_image']; ?>"alt="">
+                                        <img src="assets\img\<?php echo $result['post_image']; ?>"alt="" height="461">
                                     </div>
                                     <div class="part-text">
                                         <h3><?php echo $result['post_title']; ?></h3>
@@ -95,7 +95,7 @@
                                             <span class="date"> <?php echo $result['add_date']; ?> </span>.
                                             <span class="category">in <?php echo $result['spec_name']; ?> </span>
                                         </h4>
-                                        <p> <?php echo $result['post_desc']; ?>  </p>
+                                        <p style=" height:auto;"> <?php echo $result['post_desc']; ?>  </p>
                                     
                                             
                                         <div class="entry-footer">
@@ -117,33 +117,29 @@
                                 <?php } ?>
                                 <div class="comments">
                                 <div class="comment-area">
-
+                                <div class="comment-shadow">
+                                <h3 class="comment-area-title"> Comments </h3>
                                 <?php 
-                                $stmt = $con->prepare("SELECT comments.*, users.username FROM comments INNER JOIN users ON users.user_id = comments.user_id WHERE post_id = ? ORDER BY comment_id");
+                                $stmt = $con->prepare("SELECT comments.*, users.firstName , users.lastName FROM comments INNER JOIN users ON users.user_id = comments.user_id WHERE post_id = ? ORDER BY comment_id");
                                 $stmt->execute( array($_GET['blogId']) );
                                 $comments = $stmt->fetchAll();
                                 if( !empty($comments) ) { 
                                     foreach($comments as $comment) {
                                 ?>
                             
-                                    <div class="comment-shadow">
-                                    <h3 class="comment-area-title">Comments</h3>
-                                        <div class="single-comment border-top-none">
+                                        <div class="single-comment border-top-none col-xl-12 col-lg-12 col-md-12" >
                                             <div class="part-user">
-                                                <img src="assets\img\t2.png" alt="">
+                                                <img src="assets\img\popular-post-1.jpeg" alt="">
                                             </div>
                                             <div class="part-quot">
-                                                <h4><?php echo $comment['username'] ?></h4>
+                                                <h4><?php echo $comment['firstName'] . ' ' . $comment['lastName']; ?></h4>
                                                 <h5><?php echo $comment['comment_date'] ?></h5>
-                                                <input type="hidden" value="<?php echo $comment['comment_id'] ?>" />
                                                 <p><?php echo $comment['comment'] ?></p>
                                             </div>
-                                           
                                         </div>
-                                    </div>
-                                    <?php }
-                                }
-                                ?>
+
+                                     <?php }}?>
+                                </div>
                                 </div>
                                 </div>
 
@@ -157,19 +153,17 @@
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12">
                                                     <textarea placeholder="Write Your Message" name="comment"></textarea>
-                                                    <input type="hidden" name="post" value="<?php echo $_GET['blogId']; ?>" />
+                                                    <input type="hidden" name="post" id="post-id" value="<?php echo $_GET['blogId']; ?>" />
                                                 </div>
 
                                             </div>
                                             <button type="submit">Publish</button>
                                         </form>
-                                        
-                                      
-			</div>
-		</div>
+                            	</div>
+		     </div>
 	<!-- End Add Comment -->
 	<?php } else {
-		echo '<a href="login.php">Login</a> or <a href="register.php">Register</a> To Add Comment';
+		echo ' <br> <a href="login.php">Login</a> or <a href="register.php">Register</a> To Add Comment';
 	} ?>
                                 
                             </div>
@@ -230,7 +224,7 @@
                                                         echo $title; ?> </a></h4>
                                                         <h5><?php echo $result['add_date']; ?></h5>
                                                     </div>
-                                                </div>                                        
+                                             </div>                                        
                             <?php } ?>
                         </div>
 
@@ -265,29 +259,31 @@
     <script src="assets\js\wow.min.js"></script>
     <!-- main -->
     <script src="assets\js\main.js"></script>
+   
     <script>
 
     $(".comment_form").submit(function(e) {
         e.preventDefault();
         url = "addComment.php";
         comment = $("textarea").val();
-        post = $("input[type='hidden']").val();
+        post = $("#post-id").val();
         $.ajax({
             type: 'POST',
             url: url,
             data: 'comment=' + comment + '&post=' + post,
             success: function(data) {
                 if (data.indexOf("Error") === -1) {
-                    $(".comment_form").parents(".comments").children(".comments-area").append(data);
+                    var new_comment = data;
+                    $(".comment-shadow").append(new_comment);
                     $(".comment_form textarea").val('');
                 } else {
-                    alert("لا يمكن ترك التعليق فارغا");
-                    console.log('ksjfklsd');
-                }
-                
-            },
+                    alert(" comment can not be empty");
+                    console.log('empty');
+                }    
+            } ,
             error: function(xhr, ajaxOptions, thrownError) {
-                alert(thrownError);
+                    alert(thrownError);
+                    console.log('error');
             }
         });
     });

@@ -1,4 +1,3 @@
-
 <?php 
 
 function h($string) {
@@ -7,8 +6,6 @@ function h($string) {
     session_start();
 
     require_once 'include/db_connection.php';
-
-   include 'include/header.php'
 
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['comment'])) {
 
@@ -25,16 +22,16 @@ function h($string) {
                 $query = $con->prepare("SELECT * FROM users WHERE user_id = ?");
                 $query->execute( array($_SESSION['userId']) );
                 $user = $query->fetch();
-                echo '<div class="single-comment border-top-none">';
-                    echo '<div class="part-user">';
-                        echo '<img src="assets\img\t2.png" alt="">';
-                        echo '</div>';
-                        echo ' <div class="part-quot">';
-                        echo '<h4>' . $user['username'] . '</h4>';
-                        echo '<h5>' . $user['comment_date'] . '</h5>';
-                        echo '<p>' . $user['comment'] . '</p>';
-                    echo '</div>';
-                echo '</div>';
+                echo '<div class="single-comment border-top-none col-xl-12 col-lg-12 col-md-12" >'.
+                        '<div class="part-user">' .
+                        '<img src="assets/img/popular-post-1.jpeg" alt="">' .
+                        '</div>' .
+                        '<div class="part-quot">' .
+                        '<h4>' . $user['firstName'] . ' ' . $user['lastName'] . '</h4>'.
+                        '<h5>' . date('Y-m-d H:i:s') . '</h5>'.
+                        '<p>' . h($_POST['comment']) . '</p>'.
+                        '</div>'.
+                        '</div>';
             }
             
         }
