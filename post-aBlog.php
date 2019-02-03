@@ -1,8 +1,7 @@
 <?php include 'include/db_connection.php'; ?>
 
 <?php  
- session_start();
- if(isset($_SESSION['userId']) && $_SESSION['userType'] == 1) {
+ 
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -33,15 +32,21 @@
     <link rel="stylesheet" href="assets\css\responsive.css">
     <!-- sweetalert -->
     <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+	
+	<link rel="stylesheet" href="assets/css/summernote.css">
+	
 
 </head>
 
 <body>
     
     <?php 
-    session_unset();
-    session_destroy();
-    include 'include/header.php';?>
+    include 'include/header.php';
+	
+	if(isset($_SESSION['userId']) && $_SESSION['userType'] == 1) {
+		?>
+	
+	
     
 
     <!-- page title begin-->
@@ -163,13 +168,10 @@
                                                    
                                                    
                                                    
-                                                    <div class="col-xl-6 col-lg-6">
-                                                        <div class="form-group">
-                                                            <label for="desc">Description
-                                                            </label><label id="lab"> </label>
-                                                            <textarea class="form-control" id="desc" name="desc" ></textarea>
-                                                        </div>
+                                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                                        <textarea class="desc" id="desc" name="desc" required=""></textarea>
                                                     </div>
+													
                                                     <div class="col-xl-12 col-lg-12">
                                                     <div class="custom-file">
                                                          <input name="customFile" type="file" class="custom-file-input" id="customFile"  accept="image/*" form="postAblogForm">
@@ -225,8 +227,14 @@
     <script src="assets\js\register.js"></script>
     <!-- sweet alert -->
     <script src="assets/js/sweetalert2.min.js"></script>
-    <script>
-</script>
+	
+	<script src="assets/js/summernote.js"></script>
+	
+	<script src="assets/js/ckeditor/ckeditor.js"></script>
+		
+	<script>
+		CKEDITOR.replace( 'desc' );
+	</script>
 </body>
 </html>
 <?php } else {
