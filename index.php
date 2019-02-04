@@ -379,7 +379,7 @@
                                 <ul>
                                     <li>
                                         <a href="#">
-                                            <i class="fab fa-twitter"></i>
+                                            <i class="fab fa-github"></i>
                                         </a>
                                     </li>
                                     <li>
@@ -419,7 +419,7 @@
                                 <ul>
                                     <li>
                                         <a href="#">
-                                            <i class="fab fa-twitter"></i>
+                                            <i class="fab fa-github"></i>
                                         </a>
                                     </li>
                                     <li>
