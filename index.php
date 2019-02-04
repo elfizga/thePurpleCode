@@ -54,7 +54,7 @@
                         <div class="col-xl-6 col-lg-9 d-flex align-items-center">
                             <div class="part-text">
                                 <h1> Make A Deal With Us For Business ! </h1>
-                                <p> 
+                                <p>
                                     Let's build something amazing together .
                                 </p>
                             </div>
@@ -138,7 +138,7 @@
                                 </div>
                             </div>
                             <p>We create and direct the ecosystem of connected Experiences that today's brands have to get right, our goal is to become your Creative partner .</p>
-                            
+
                         </div>
                     </div>
 
@@ -153,10 +153,10 @@
                                 </div>
                             </div>
                             <p>We have many Certifications and we have designed and developed many of the sites on web , we're proud satisfaction of our customers in this field.</p>
-                            
+
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="single-about">
                             <div class="heading">
@@ -168,7 +168,7 @@
                                 </div>
                             </div>
                             <p> Actively working with js, HTML5, CSS3, PHP and SQL to create future-facing responsive front-end and back-end applications, pages and complete websites. </p>
-                            
+
                         </div>
                     </div>
 
@@ -183,7 +183,7 @@
                                 </div>
                             </div>
                             <p>We help our clients define their brand in the world and how to achieve it with lowest price and highest quality by our professional web design services.</p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -199,15 +199,15 @@
                     <div class="part-left">
                         <h2>We were always<br>
                         at your service</h2>
-                        <p> Do you want a clean , sharp , professional website 
-                            design <br> that will adapt to the future growth of 
+                        <p> Do you want a clean , sharp , professional website
+                            design <br> that will adapt to the future growth of
                             your business or organization ? <br>
                             we can build your website efficiently with
-                            an acceptably good price <br> and in a perfect 
+                            an acceptably good price <br> and in a perfect
                             time period , we are proud of our design background ; <br>
                             it's the core of our business .
                         </p>
-                       
+
                     </div>
                 </div>
 
@@ -235,7 +235,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="row">
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-reason">
@@ -245,11 +245,11 @@
                             <div class="part-text">
                                 <h3> Design with loud Impact </h3>
                                 <p> We combine the art , design and brand in everything we do , we aim to give you the first useful things .. without a well designed website you are missing out .</p>
-                                
+
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-reason">
                             <div class="part-img">
@@ -261,7 +261,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-reason">
                             <div class="part-img">
@@ -467,7 +467,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-7">
                         <form class="newsletter-form">
@@ -491,13 +491,13 @@
                 </div>
 
                 <div class="row">
-                    <?php 
+                    <?php
                         $sql = "
-                        SELECT 
+                        SELECT
                         posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
-                        users.firstName , users.lastName , specializations.spec_name 
-                        FROM posts 
-                        INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                        users.firstName , users.lastName , specializations.spec_name
+                        FROM posts
+                        INNER JOIN specializations ON specializations.spec_id = posts.spec_id
                         INNER JOIN users ON users.user_id = posts.user_id ORDER BY post_id DESC LIMIT 3 ";
                         global $con;
                         $query = $con->prepare($sql);
@@ -505,7 +505,7 @@
                         $results = $query->fetchAll();
                         foreach($results as $result) { ?>
 
-            
+
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-blog" id="sBlog">
                             <div class="part-img">
@@ -518,16 +518,18 @@
                                     <span class="date"><?php echo $result['add_date']; ?> </span>.
                                     <span class="category">in <?php echo $result['spec_name']; ?> </span>
                                 </h4>
-                                <p>  <?php
-                                        $desc = ""; 
+                                <?php
+                                        $desc = "";
                                          if(strlen($result['post_desc']) > 140) {
-                                            $desc = substr($result['post_desc'], 0, 140) . "...";
+                                            $desc = substr($result['post_desc'], 0, 140) . "...</p>";
                                          } else {
-                                            $desc = $result['post_desc']; 
+                                            $desc = $result['post_desc'];
                                         }
                                         $desc = strtolower($desc);
                                         $desc = ucfirst($desc);
-                                        echo $desc; ?>  </p>
+                                        $desc = strip_tags($desc, "<p>");
+                                        echo $desc; ?>
+
                                 <a class="read-more"href="blog-details.php?blogId=<?php echo $result['post_id']; ?>"><span><i class="fas fa-book-reader"></i></span> Read More </a>
                             </div>
                         </div>
