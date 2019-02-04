@@ -105,7 +105,7 @@
                                                 <span class="date"><?php echo $result['add_date']; ?> </span>.
                                                 <span class="category">in <?php echo $result['spec_name']; ?> </span>
                                             </h4>
-                                            <a class="read-more" href="#"><span><i class="fas fa-book-reader"></i></span> Read This Post</a>
+                                            <a class="read-more" href="blog-details.php?blogId=<?php echo $result['post_id']; ?>"><span><i class="fas fa-book-reader"></i></span> Read This Post</a>
                                         </div>
                                     </div>
                                 </div>
