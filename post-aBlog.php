@@ -45,9 +45,6 @@
 	
 	if(isset($_SESSION['userId']) && $_SESSION['userType'] == 1) {
 		?>
-	
-	
-    
 
     <!-- page title begin-->
     <div class="page-title register-page">
