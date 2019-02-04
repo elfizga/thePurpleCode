@@ -68,15 +68,15 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12">
                             <div class="single-blog blog-details">
-                            <?php  
+                            <?php
                                 if(isset($_GET['blogId'])){
                                 $id=$_GET['blogId'];
                                 $sql = "
-                                            SELECT 
+                                            SELECT
                                             posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
-                                            users.firstName , users.lastName , specializations.spec_name 
-                                            FROM posts 
-                                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                                            users.firstName , users.lastName , specializations.spec_name
+                                            FROM posts
+                                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id
                                             INNER JOIN users ON users.user_id = posts.user_id WHERE posts.post_id = ? ";
                                             global $con;
                                             $query = $con->prepare($sql);
@@ -88,7 +88,7 @@
                                     <div class="part-img">
                                         <img src="assets\img\<?php echo $result['post_image']; ?>"alt="" height="461">
                                     </div>
-                                    <div class="part-text">
+                                    <div class="part-text details-text">
                                         <h3><?php echo $result['post_title']; ?></h3>
                                         <h4>
                                             <span class="admin">By  <?php echo $result['firstName'] . ' ' . $result['lastName']; ?> </span>.
@@ -96,8 +96,8 @@
                                             <span class="category">in <?php echo $result['spec_name']; ?> </span>
                                         </h4>
                                         <p style=" height:auto;"> <?php echo $result['post_desc']; ?>  </p>
-                                    
-                                            
+
+
                                         <div class="entry-footer">
                                             <div class="share">
                                                 <ul>
@@ -110,23 +110,23 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    
+
                                     </div>
                                 </div>
-                                
+
                                 <?php } ?>
                                 <div class="comments">
                                 <div class="comment-area">
                                 <div class="comment-shadow">
                                 <h3 class="comment-area-title"> Comments </h3>
-                                <?php 
+                                <?php
                                 $stmt = $con->prepare("SELECT comments.*, users.firstName , users.lastName FROM comments INNER JOIN users ON users.user_id = comments.user_id WHERE post_id = ? ORDER BY comment_id");
                                 $stmt->execute( array($_GET['blogId']) );
                                 $comments = $stmt->fetchAll();
-                                if( !empty($comments) ) { 
+                                if( !empty($comments) ) {
                                     foreach($comments as $comment) {
                                 ?>
-                            
+
                                         <div class="single-comment border-top-none col-xl-12 col-lg-12 col-md-12" >
                                             <div class="part-user">
                                                 <img src="assets\img\popular-post-1.jpeg" alt="">
@@ -165,7 +165,7 @@
 	<?php } else {
 		echo ' <br> <a href="login.php">Login</a> or <a href="register.php">Register</a> To Add Comment';
 	} ?>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -175,11 +175,11 @@
 
                 <div class="col-xl-4 col-lg-4">
                     <div class="sidebar">
-            
+
                         <div class="widget widget_categories">
                                     <h6 class="widgettitle"><span>Categories</span></h6>
                                     <ul>
-                                    <?php 
+                                    <?php
                                         $sql = "
                                             SELECT * FROM specializations;
                                              ";
@@ -190,15 +190,15 @@
                                         foreach($results as $result) { ?>
                                             <li><a href="blog.php?id=<?php echo $result['spec_id']; ?>"><?php echo $result['spec_name']; ?></a></li>
                                         <?php } ?>
-                                        
+
                                     </ul>
                         </div>
-            
+
                         <div class="widget widget-popular-post">
                             <h6 class="widgettitle">
                                 <span> Recent Posts </span>
                             </h6>
-                            <?php 
+                            <?php
                                         $sql = "
                                             SELECT * FROM posts ORDER BY post_id DESC LIMIT 3;
                                              ";
@@ -213,7 +213,7 @@
                                                     </div>
                                                     <div class="part-text">
                                                         <h4><a href="blog-details.php?blogId=<?php echo $result['post_id']; ?>" > <?php
-                                                        $title = ""; 
+                                                        $title = "";
                                                             if(strlen($result['post_title']) > 15) {
                                                                 $title = substr($result['post_title'], 0, 21) . "...";
                                                             } else {
@@ -224,7 +224,7 @@
                                                         echo $title; ?> </a></h4>
                                                         <h5><?php echo $result['add_date']; ?></h5>
                                                     </div>
-                                             </div>                                        
+                                             </div>
                             <?php } ?>
                         </div>
 
@@ -242,7 +242,7 @@
         <a><i class="fas fa-long-arrow-alt-up"></i></a>
     </div>
     <!-- scroll top button end -->
-    
+
     <!-- jquery -->
     <script src="assets\js\jquery.js"></script>
     <!-- bootstrap -->
@@ -259,7 +259,7 @@
     <script src="assets\js\wow.min.js"></script>
     <!-- main -->
     <script src="assets\js\main.js"></script>
-   
+
     <script>
 
     $(".comment_form").submit(function(e) {
@@ -279,7 +279,7 @@
                 } else {
                     alert(" comment can not be empty");
                     console.log('empty');
-                }    
+                }
             } ,
             error: function(xhr, ajaxOptions, thrownError) {
                     alert(thrownError);

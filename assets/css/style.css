@@ -835,7 +835,7 @@ ul {
         background: #0b205a; }
 
 /*==========================================
-    choosing reason 
+    choosing reason
 ==========================================*/
 .choosing-reason {
   padding: 111px 0 90px; }
@@ -1715,7 +1715,7 @@ ul {
     margin-bottom: 30px;
     -webkit-box-shadow: 0px 30px 100px 0px rgba(0, 0, 0, 0.05);
     box-shadow: 0px 30px 100px 0px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(129, 7, 151, 0.13); 
+    border: 1px solid rgba(129, 7, 151, 0.13);
     }
     #sBlog {
       height: 480px;
@@ -1784,6 +1784,10 @@ ul {
         margin: 0;
         font-weight: 400;
         height: 80px; }
+
+        .blog-post .single-blog .details-text p {
+          height: auto;
+        }
       .blog-post .single-blog .part-text a.read-more {
         display: inline-block;
         background: #fff;
