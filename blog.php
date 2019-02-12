@@ -64,32 +64,48 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-8">
                     <div class="row">
-                        
-                        <?php 
+
+                        <?php
                         if(isset($_GET['id'])) {
-                            $sql = "SELECT 
+                            $sql = "SELECT
                             posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
-                            users.firstName , users.lastName , specializations.spec_name 
-                            FROM posts 
-                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                            users.firstName , users.lastName , specializations.spec_name
+                            FROM posts
+                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id
                             INNER JOIN users ON users.user_id = posts.user_id WHERE posts.spec_id = ? ORDER BY post_id DESC";
                             global $con;
                             $query = $con->prepare($sql);
                             $query->execute(array($_GET['id']));
-                        } else {
+                        } else if(isset($_GET['search'])) {
+
+                          $sql = "
+                          SELECT
+                          posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
+                          users.firstName , users.lastName , specializations.spec_name
+                          FROM posts
+                          INNER JOIN specializations ON specializations.spec_id = posts.spec_id
+                          INNER JOIN users ON users.user_id = posts.user_id
+                          WHERE posts.post_title LIKE '%" . $_GET['search'] ."%'
+                          ORDER BY post_id DESC ";
+                          global $con;
+                          $query = $con->prepare($sql);
+                          $query->execute();
+
+                        }
+                        else {
                             $sql = "
-                            SELECT 
+                            SELECT
                             posts.post_id, posts.post_title, posts.post_image , posts.post_desc ,  posts.add_date ,
-                            users.firstName , users.lastName , specializations.spec_name 
-                            FROM posts 
-                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id 
+                            users.firstName , users.lastName , specializations.spec_name
+                            FROM posts
+                            INNER JOIN specializations ON specializations.spec_id = posts.spec_id
                             INNER JOIN users ON users.user_id = posts.user_id ORDER BY post_id DESC ";
                             global $con;
                             $query = $con->prepare($sql);
                             $query->execute();
                         }
-                        
-                        
+
+
                         $results = $query->fetchAll();
                         if(count($results) > 0) {
                             foreach($results as $result) { ?>
@@ -115,7 +131,7 @@
                             <div class="alert alert-danger col-sm-12">No Posts Found</div>
 
                         <?php } ?>
-                        
+
 
                     </div>
                 </div>
@@ -135,7 +151,7 @@
                                     <h6 class="widgettitle"><span>Categories</span></h6>
 
                                     <ul>
-                                    <?php 
+                                    <?php
                                         $sql = "
                                             SELECT * FROM specializations;
                                              ";
@@ -146,7 +162,7 @@
                                         foreach($results as $result) { ?>
                                             <li><a href="blog.php?id=<?php echo $result['spec_id']; ?>"><?php echo $result['spec_name']; ?></a></li>
                                         <?php } ?>
-                                        
+
                                     </ul>
                                 </div>
 
@@ -154,7 +170,7 @@
                             <h6 class="widgettitle">
                                 <span> Recent Posts</span>
                             </h6>
-                            <?php 
+                            <?php
                                         $sql = "
                                             SELECT * FROM posts ORDER BY post_id DESC LIMIT 5;
                                              ";
@@ -169,7 +185,7 @@
                                                     </div>
                                                     <div class="part-text">
                                                         <h4><a href="blog-details.php?blogId=<?php echo $result['post_id']; ?>" > <?php
-                                                        $title = ""; 
+                                                        $title = "";
                                                             if(strlen($result['post_title']) > 15) {
                                                                 $title = substr($result['post_title'], 0, 21) . "...";
                                                             } else {
@@ -180,16 +196,16 @@
                                                         echo $title; ?> </a></h4>
                                                         <h5><?php echo $result['add_date']; ?></h5>
                                                     </div>
-                                                </div>                                        
+                                                </div>
                             <?php } ?>
                         </div>
 
-                                
+
                     </div>
                 </div>
             </div>
-    
-            
+
+
         </div>
     </div>
 
